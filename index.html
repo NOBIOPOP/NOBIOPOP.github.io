@@ -2,69 +2,216 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <title>โปรไฟล์ส่วนตัว</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ปิยชาติ อึงสะกาว | โปรไฟล์ส่วนตัว</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@500;600;700&family=Noto+Sans+Thai:wght@400;500&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --ink: #0a0a0a;
+      --paper: #ffffff;
+      --bg: #e9eaee;
+      --grid: #d9dbe2;
+      --muted: #5d6270;
+      --line: #e3e5ea;
+      --red: #e5192b;
+      --display: 'Kanit', 'Noto Sans Thai', system-ui, sans-serif;
+      --body: 'Noto Sans Thai', 'Segoe UI', system-ui, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #f0f2f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 32px 16px;
+      font-family: var(--body);
+      color: var(--ink);
+      background-color: var(--bg);
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
     }
-    .profile-card {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      padding: 40px;
-      text-align: center;
-      width: 300px;
+
+    .card {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      background: var(--paper);
+      border: 3px solid var(--ink);
+      border-radius: 6px;
+      box-shadow: 10px 10px 0 var(--ink);
+      overflow: hidden;
     }
-    .profile-card img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
+
+    .banner {
+      height: 96px;
+      background: var(--ink);
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size: 14px 14px;
+      position: relative;
+    }
+    .banner::after {
+      content: "";
+      position: absolute;
+      right: 0; bottom: 0;
+      width: 72px; height: 14px;
+      background: var(--red);
+    }
+
+    .body { padding: 0 28px 28px; text-align: center; }
+
+    .avatar {
+      position: relative;
+      width: 128px; height: 128px;
+      margin: -64px auto 18px;
+      border: 4px solid var(--ink);
+      border-radius: 6px;
+      background: var(--paper);
+      box-shadow: 6px 6px 0 var(--red);
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+    }
+    .avatar img {
+      width: 100%; height: 100%;
       object-fit: cover;
-      margin-bottom: 20px;
-      border: 4px solid #000000;
+      display: block;
     }
-    .profile-card h1 {
-      font-size: 22px;
-      color: #333;
-      margin-bottom: 5px;
+    .avatar .fallback {
+      display: none;
+      font: 700 56px/1 var(--display);
     }
-    .profile-card p {
-      color: #777;
+    .avatar.no-img img { display: none; }
+    .avatar.no-img .fallback { display: block; }
+
+    h1 {
+      margin: 0;
+      font: 700 28px/1.25 var(--display);
+      letter-spacing: .2px;
+    }
+    .en {
+      margin: 2px 0 14px;
       font-size: 14px;
-      margin-bottom: 20px;
+      color: var(--muted);
     }
-    .profile-card a {
+
+    .role {
       display: inline-block;
-      padding: 10px 20px;
-      background: #000000;
-      color: white;
-      border-radius: 10px;
-      text-decoration: none;
-      transition: background 0.3s ease;
+      padding: 4px 12px;
+      font: 500 14px/1.5 var(--display);
+      color: #fff;
+      background: var(--red);
+      border-radius: 4px;
     }
-    .profile-card a:hover {
-      background: #ff0000;
+
+    .about {
+      margin: 18px 0 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #2b2f3a;
+    }
+
+    dl {
+      margin: 22px 0 0;
+      padding: 0;
+      text-align: left;
+      border-top: 2px solid var(--ink);
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 92px 1fr;
+      gap: 12px;
+      padding: 11px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+    dt { color: var(--muted); }
+    dd { margin: 0; font-weight: 500; }
+
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .btn {
+      display: block;
+      padding: 12px 10px;
+      font: 600 15px/1.2 var(--display);
+      text-decoration: none;
+      text-align: center;
+      border: 2px solid var(--ink);
+      border-radius: 4px;
+      transition: transform .12s ease, box-shadow .12s ease, background .12s ease, color .12s ease;
+    }
+    .btn.primary { background: var(--ink); color: #fff; }
+    .btn.secondary { background: var(--paper); color: var(--ink); }
+    .btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 4px 4px 0 var(--red);
+    }
+    .btn.primary:hover { background: var(--ink); }
+    .btn:active { transform: none; box-shadow: none; }
+    .btn:focus-visible { outline: 3px solid var(--red); outline-offset: 3px; }
+
+    @media (max-width: 380px) {
+      .body { padding: 0 20px 24px; }
+      .row { grid-template-columns: 1fr; gap: 0; }
+      .actions { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .btn { transition: none; }
     }
   </style>
 </head>
 <body>
 
-  <div class="profile-card">
-    <img src="IMG_1428.jpg" alt="รูปโปรไฟล์">
-    <h1>ปิยชาติ อึงสะกาว</h1>
-    <p>นักพัฒนาเว็บไซต์ | ชอบฟุตบอล & เทคโนโลยี</p>
-    <a href="https://github.com/NOBIOPOP">ติดต่อฉัน</a>
-  </div>
+  <main class="card">
+    <div class="banner" aria-hidden="true"></div>
+
+    <div class="body">
+      <div class="avatar" id="avatar">
+        <img src="IMG_1428.jpg" alt="รูปโปรไฟล์ของปิยชาติ"
+             onerror="document.getElementById('avatar').classList.add('no-img')">
+        <span class="fallback" aria-hidden="true">ป</span>
+      </div>
+
+      <h1>ปิยชาติ อึงสะกาว</h1>
+      <p class="en">Piyachat Ouengsakao</p>
+      <span class="role">Programmer</span>
+
+      <p class="about">นักศึกษาวิทยาการคอมพิวเตอร์ที่หลงใหลในการพัฒนาเกม และกำลังเรียนรู้การเขียนโปรแกรมอย่างต่อเนื่อง</p>
+
+      <dl>
+        <div class="row">
+          <dt>การศึกษา</dt>
+          <dd>วิทยาการคอมพิวเตอร์ คณะวิทยาศาสตร์ ชั้นปีที่ 2</dd>
+        </div>
+        <div class="row">
+          <dt>มหาวิทยาลัย</dt>
+          <dd>มหาวิทยาลัยราชภัฏอุดรธานี</dd>
+        </div>
+        <div class="row">
+          <dt>สนใจ</dt>
+          <dd>การพัฒนาเกม</dd>
+        </div>
+      </dl>
+
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/NOBIOPOP" target="_blank" rel="noopener">ดู GitHub</a>
+        <a class="btn secondary" href="mailto:nome123456cc@gmail.com">ส่งอีเมล</a>
+      </div>
+    </div>
+  </main>
 
 </body>
 </html>
-
-
-
